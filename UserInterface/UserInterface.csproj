@@ -10,8 +10,4 @@
       <ProjectReference Include="..\Dominio\Dominio.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="MudBlazor" Version="7.0.0-rc.2" />
-    </ItemGroup>
-
 </Project>
