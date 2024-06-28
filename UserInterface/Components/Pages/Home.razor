@@ -1,0 +1,21 @@
+﻿@page "/"
+@rendermode InteractiveServer
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!!</h1>
+
+Welcome to your new app.
+
+<button @onclick="contar">@numero</button>
+
+@code
+{
+    int numero = 0;
+    
+    public void contar()
+    {
+        numero++;
+        Recibo recibo = new Recibo();
+        
+    }
+}
