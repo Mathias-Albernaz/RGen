@@ -45,6 +45,6 @@ public class Recibo
                     });
             });
         });
-        Document.GeneratePdfAndShow();
+        Document.ShowInPreviewerAsync();
     }
 }
