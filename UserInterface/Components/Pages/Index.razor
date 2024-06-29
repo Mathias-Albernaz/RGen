@@ -2,6 +2,7 @@
 @rendermode InteractiveServer
 
 @using System.ComponentModel.DataAnnotations
+@using Dominio
 
 <MudPopoverProvider/>
 <MudDialogProvider/>
@@ -10,34 +11,53 @@
 <MudText Typo="Typo.h2" Align="Align.Center">Nuevo Recibo</MudText>
 <MudContainer MaxWidth="MaxWidth.Small">
     <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
-        
-            <MudCard>
-                <MudCardContent>
-                    <MudTextField Label="Titulo" HelperText="Max. 8 characters"
-                                  @bind-Value="model.Titulo" For="@(() => model.Titulo)"/>
-                    <MudTextField Label="Autor" HelperText="Iniciales" Class="mt-3"
-                                  @bind-Value="model.Autor" For="@(() => model.Autor)"/>
-                    <MudTextField Label="Detalle" HelperText="Opcional" Class="mt-3"
-                                  @bind-Value="model.Detalle" For="@(() => model.Detalle)" InputType="InputType.Password"/>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Crear</MudButton>
-                </MudCardActions>
-            </MudCard>
-        
+        <MudCard>
+            <MudCardContent>
+                <MudTextField Label="Titulo" HelperText="Max. 50 characters"
+                              @bind-Value="model.Titulo" For="@(() => model.Titulo)"/>
+                <MudTextField Label="Autor" HelperText="Iniciales" Class="mt-3"
+                              @bind-Value="model.Autor" For="@(() => model.Autor)"/>
+                <MudTextField Label="Detalle" HelperText="Opcional" Class="mt-3"
+                              @bind-Value="model.Detalle" For="@(() => model.Detalle)" />
+            </MudCardContent>
+        </MudCard>
+        <MudDivider DividerType="DividerType.Middle" Class="my-6"/>
+        <MudItem>
+            <MudNumericField @bind-Value="cantidad"  Label="Usar Shift + Rueda del raton" Variant="Variant.Outlined" Min="0"/>
+            <MudGrid Spacing="0">
+                <MudTextField @bind-Value="descripcion" Label="Outlined" Variant="Variant.Outlined" Lines="3"></MudTextField>
+                <MudTextField @bind-Value="identificador" Label="Outlined" Variant="Variant.Outlined" Lines="3"></MudTextField>
+            </MudGrid>
+            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Text" Color="Color.Primary" Size="Size.Small" Class="ml-auto" Style="display: flex; align-self:end">Agregar Item</MudButton>
+        </MudItem>
+        <MudCardActions>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" Size="Size.Medium">Crear</MudButton>
+            </MudCardActions>
     </EditForm>
 </MudContainer>
 
 
 
+
 @code {
+    
+    List<Item> items;
     Form model = new Form();
     bool success;
+
+    int cantidad = 0;
+    string descripcion = "";
+    string identificador = "";
+    
+    protected override void OnInitialized()
+    {
+        items = new List<Item>();
+    }
 
     public class Form
     {
         [Required]
-        [StringLength(8)]
+        [StringLength(50)]
         public string Titulo { get; set; }
 
         [Required]
