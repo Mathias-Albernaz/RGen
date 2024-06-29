@@ -7,7 +7,7 @@
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
-<MudText Typo="Typo.h2" Align="Align.Center">Crear Recibo</MudText>
+<MudText Typo="Typo.h2" Align="Align.Center">Nuevo Recibo</MudText>
 <MudContainer MaxWidth="MaxWidth.Small">
     <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
         
@@ -15,7 +15,7 @@
                 <MudCardContent>
                     <MudTextField Label="Titulo" HelperText="Max. 8 characters"
                                   @bind-Value="model.Titulo" For="@(() => model.Titulo)"/>
-                    <MudTextField Label="Iniciales" Class="mt-3"
+                    <MudTextField Label="Autor" HelperText="Iniciales" Class="mt-3"
                                   @bind-Value="model.Autor" For="@(() => model.Autor)"/>
                     <MudTextField Label="Detalle" HelperText="Opcional" Class="mt-3"
                                   @bind-Value="model.Detalle" For="@(() => model.Detalle)" InputType="InputType.Password"/>
@@ -31,16 +31,17 @@
 
 
 @code {
-    RegisterAccountForm model = new RegisterAccountForm();
+    Form model = new Form();
     bool success;
 
-    public class RegisterAccountForm
+    public class Form
     {
         [Required]
         [StringLength(8)]
         public string Titulo { get; set; }
 
         [Required]
+        [StringLength(2)]
         public string Autor { get; set; }
 
         
