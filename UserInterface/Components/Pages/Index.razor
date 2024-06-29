@@ -3,6 +3,8 @@
 
 @using System.ComponentModel.DataAnnotations
 @using Dominio
+@using UserInterface.Components.Shared
+@inject IDialogService DialogService
 
 <MudPopoverProvider/>
 <MudDialogProvider/>
@@ -21,20 +23,41 @@
                               @bind-Value="model.Detalle" For="@(() => model.Detalle)" />
             </MudCardContent>
         </MudCard>
-        <MudDivider DividerType="DividerType.Middle" Class="my-6"/>
-        <MudItem>
-            <MudNumericField @bind-Value="cantidad"  Label="Usar Shift + Rueda del raton" Variant="Variant.Outlined" Min="0"/>
-            <MudGrid Spacing="0">
-                <MudTextField @bind-Value="descripcion" Label="Outlined" Variant="Variant.Outlined" Lines="3"></MudTextField>
-                <MudTextField @bind-Value="identificador" Label="Outlined" Variant="Variant.Outlined" Lines="3"></MudTextField>
-            </MudGrid>
-            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Text" Color="Color.Primary" Size="Size.Small" Class="ml-auto" Style="display: flex; align-self:end">Agregar Item</MudButton>
-        </MudItem>
+        <MudDivider DividerType="DividerType.Middle" Class="my-8"/>
+        <MudText Typo="Typo.h5" Align="Align.Center">Elementos</MudText>
+        
+        <MudSimpleTable Dense="false" FixedHeader="true" Style="@(true?"height:200px;":"")" Striped="true">
+            <thead>
+                <tr>
+                    @foreach (var h in headings)
+                    {
+                        <th>@h</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in rows)
+                {
+                    <tr>
+                        @foreach (var x in row.Split(","))
+                        {
+                            <td>@x</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Text" Color="Color.Primary" Size="Size.Small" Class="ml-auto"  @onclick="OpenDialogAsync">Agregar Item</MudButton>
+        
+        <MudDivider DividerType="DividerType.Middle" Class="my-5"/>
         <MudCardActions>
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" Size="Size.Medium">Crear</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" Size="Size.Medium" FullWidth="true">Crear</MudButton>
             </MudCardActions>
     </EditForm>
 </MudContainer>
+
+
+
 
 
 
@@ -45,6 +68,18 @@
     Form model = new Form();
     bool success;
 
+    string[] headings = { "Cantidad" ,"Descripcion", "Identificador" };
+    string[] rows = 
+    {
+         "1,Pc completa con teclado y mouse,BRT5434HGDFG333344",
+         "2,Tetra marca Sepoura con clip de enganche,Abc122SSSD113EC",
+         "14,Elemento 3,Abc123333",
+         "1,Elemento 4,Abc122233",
+         
+        
+    };
+    
+    
     int cantidad = 0;
     string descripcion = "";
     string identificador = "";
@@ -74,5 +109,13 @@
         success = true;
         StateHasChanged();
     }
+    
+    private Task OpenDialogAsync()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+
+        return DialogService.ShowAsync<FormDialog>("Simple Dialog", options);
+    }
+    
 
 }

@@ -1,0 +1,30 @@
+<MudDialog>
+    <TitleContent>
+        Nuevo elemento
+    </TitleContent>
+    <DialogContent>
+        <MudItem>
+                    <MudNumericField @bind-Value="cantidad"  Label="Usar Shift + Rueda del raton" Variant="Variant.Outlined" Min="0"/>
+                    <MudGrid Spacing="0">
+                        <MudTextField @bind-Value="descripcion" Label="Outlined" Variant="Variant.Outlined" Lines="3"></MudTextField>
+                        <MudTextField @bind-Value="identificador" Label="Outlined" Variant="Variant.Outlined" Lines="3"></MudTextField>
+                    </MudGrid>
+                </MudItem>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    public int cantidad { get; set; }
+    public string descripcion { get; set; }
+    public string identificador { get; set; }
+    
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+
+    private void Submit() => MudDialog.Close(DialogResult.Ok(true));
+
+    private void Cancel() => MudDialog.Cancel();
+}
