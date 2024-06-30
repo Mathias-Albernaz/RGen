@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface", "UserInterface\UserInterface.csproj", "{3616660B-719C-4B90-B49C-8D37168665C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{0276E39D-46B3-44D4-89EB-F79E8D9BBC73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{3616660B-719C-4B90-B49C-8D37168665C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3616660B-719C-4B90-B49C-8D37168665C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3616660B-719C-4B90-B49C-8D37168665C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0276E39D-46B3-44D4-89EB-F79E8D9BBC73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0276E39D-46B3-44D4-89EB-F79E8D9BBC73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0276E39D-46B3-44D4-89EB-F79E8D9BBC73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0276E39D-46B3-44D4-89EB-F79E8D9BBC73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

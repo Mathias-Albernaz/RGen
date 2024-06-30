@@ -4,6 +4,7 @@
 @using System.ComponentModel.DataAnnotations
 @using Dominio
 @using UserInterface.Components.Shared
+@inject ItemMemoryRepo ItemMemoryRepo
 @inject IDialogService DialogService
 
 <MudPopoverProvider/>
@@ -86,7 +87,7 @@
     
     protected override void OnInitialized()
     {
-        items = new List<Item>();
+        items = ItemMemoryRepo.listItems();
     }
 
     public class Form

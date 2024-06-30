@@ -1,5 +1,6 @@
 using UserInterface.Components;
 using MudBlazor.Services;
+using Repository;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMudServices();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddSingleton<Repository.ItemMemoryRepo>();
 
 
 var app = builder.Build();

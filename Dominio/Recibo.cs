@@ -9,6 +9,9 @@ using QuestPDF.Previewer;
 public class Recibo
 {
     public Document Document { get; set; }
+    
+    
+    
 
     public Recibo()
     {
@@ -23,7 +26,7 @@ public class Recibo
                 page.DefaultTextStyle(x => x.FontSize(20));
 
                 page.Header()
-                    .Text("Hello PDF!")
+                    .Text("UnTitulo")
                     .SemiBold().FontSize(36).FontColor(Colors.Blue.Medium);
 
                 page.Content()
@@ -31,7 +34,6 @@ public class Recibo
                     .Column(x =>
                     {
                         x.Spacing(20);
-
                         x.Item().Text(Placeholders.LoremIpsum());
                         x.Item().Image(Placeholders.Image(200, 100));
                     });
