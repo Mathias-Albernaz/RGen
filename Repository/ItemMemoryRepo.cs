@@ -5,6 +5,11 @@ public class ItemMemoryRepo
 {
     public List<Item> Items { get; set; }
 
+    public ItemMemoryRepo()
+    {
+        Items = new List<Item>();
+    }
+
     public void addItem(int cantidad, string descripcion, string id)
     {
         if (!Items.Exists(i => i.Identificador == id))

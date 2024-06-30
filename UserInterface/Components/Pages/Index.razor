@@ -3,6 +3,7 @@
 
 @using System.ComponentModel.DataAnnotations
 @using Dominio
+@using QuestPDF.Fluent
 @using UserInterface.Components.Shared
 @inject ItemMemoryRepo ItemMemoryRepo
 @inject IDialogService DialogService
@@ -20,6 +21,9 @@
                               @bind-Value="model.Titulo" For="@(() => model.Titulo)"/>
                 <MudTextField Label="Autor" HelperText="Iniciales" Class="mt-3"
                               @bind-Value="model.Autor" For="@(() => model.Autor)"/>
+                <MudTextField Label="Destinatario"  Class="mt-3"
+                              @bind-Value="model.Destinatario" For="@(() => model.Destinatario)" />
+                <MudDatePicker For="@(() => model.Fecha)"/>
                 <MudTextField Label="Detalle" HelperText="Opcional" Class="mt-3"
                               @bind-Value="model.Detalle" For="@(() => model.Detalle)" />
             </MudCardContent>
@@ -37,10 +41,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var row in rows)
+                @foreach (var row in items)
                 {
                     <tr>
-                        @foreach (var x in row.Split(","))
+                        @foreach (var x in row.ToString().Split(","))
                         {
                             <td>@x</td>
                         }
@@ -64,30 +68,18 @@
 
 
 @code {
-    
     List<Item> items;
     Form model = new Form();
     bool success;
 
     string[] headings = { "Cantidad" ,"Descripcion", "Identificador" };
-    string[] rows = 
-    {
-         "1,Pc completa con teclado y mouse,BRT5434HGDFG333344",
-         "2,Tetra marca Sepoura con clip de enganche,Abc122SSSD113EC",
-         "14,Elemento 3,Abc123333",
-         "1,Elemento 4,Abc122233",
-         
-        
-    };
     
     
-    int cantidad = 0;
-    string descripcion = "";
-    string identificador = "";
     
     protected override void OnInitialized()
     {
         items = ItemMemoryRepo.listItems();
+        StateHasChanged();
     }
 
     public class Form
@@ -100,6 +92,10 @@
         [StringLength(2)]
         public string Autor { get; set; }
 
+        [Required]
+        public string Destinatario { get; set; }
+
+        [Required] public DateTime? Fecha { get; set; } = DateTime.Today;
         
         public string Detalle { get; set; }
         
@@ -108,14 +104,22 @@
     private void OnValidSubmit(EditContext context)
     {
         success = true;
+        doc = new Recibo();
         StateHasChanged();
     }
     
-    private Task OpenDialogAsync()
+    private async Task OpenDialogAsync()
     {
         var options = new DialogOptions { CloseOnEscapeKey = true };
+        var dialog = DialogService.Show<FormDialog>("Agregar Elemento", options);
+        var result = await dialog.Result;
 
-        return DialogService.ShowAsync<FormDialog>("Simple Dialog", options);
+        if (!result.Cancelled)
+        {
+            StateHasChanged();
+        }
+        
+        
     }
     
 

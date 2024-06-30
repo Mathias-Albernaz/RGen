@@ -1,13 +1,18 @@
+@inject ItemMemoryRepo ItemMemoryRepo
+
+@inject ISnackbar Snackbar
+
+
 <MudDialog>
     <TitleContent>
         Nuevo elemento
     </TitleContent>
     <DialogContent>
         <MudItem>
-                    <MudNumericField @bind-Value="cantidad"  Label="Usar Shift + Rueda del raton" Variant="Variant.Outlined" Min="0"/>
+                    <MudNumericField @bind-Value="cantidad"  Label="Usar Shift + Rueda del raton" Variant="Variant.Outlined" Min="1"/>
                     <MudGrid Spacing="0">
-                        <MudTextField @bind-Value="descripcion" Label="Outlined" Variant="Variant.Outlined" Lines="3"></MudTextField>
-                        <MudTextField @bind-Value="identificador" Label="Outlined" Variant="Variant.Outlined" Lines="3"></MudTextField>
+                        <MudTextField @bind-Value="descripcion" Label="Descripcion" Variant="Variant.Outlined" Lines="3" Required="true"></MudTextField>
+                        <MudTextField @bind-Value="identificador" Label="Identificador" Variant="Variant.Outlined" Lines="3" Required="true"></MudTextField>
                     </MudGrid>
                 </MudItem>
     </DialogContent>
@@ -17,14 +22,32 @@
     </DialogActions>
 </MudDialog>
 @code {
-    public int cantidad { get; set; }
+
+    public int cantidad { get; set; } 
     public string descripcion { get; set; }
     public string identificador { get; set; }
-    
+
+    protected override void OnInitialized()
+    {
+        cantidad = 1;
+        descripcion = identificador = "";
+    }
+
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; }
 
-    private void Submit() => MudDialog.Close(DialogResult.Ok(true));
-
+    private void Submit()
+    {
+        if (identificador != "" && descripcion != "")
+        {
+            ItemMemoryRepo.addItem(cantidad,descripcion,identificador);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        else
+        {
+            Snackbar.Add("Todos los campos son obligatorios", Severity.Error);
+        }
+    } 
+    
     private void Cancel() => MudDialog.Cancel();
 }

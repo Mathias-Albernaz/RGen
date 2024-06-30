@@ -8,6 +8,8 @@ using QuestPDF.Previewer;
 
 public class Recibo
 {
+    List<Item> items;
+    
     public Document Document { get; set; }
     
     
@@ -23,29 +25,11 @@ public class Recibo
                 page.Size(PageSizes.A4);
                 page.Margin(2, Unit.Centimetre);
                 page.PageColor(Colors.White);
-                page.DefaultTextStyle(x => x.FontSize(20));
-
-                page.Header()
-                    .Text("UnTitulo")
-                    .SemiBold().FontSize(36).FontColor(Colors.Blue.Medium);
-
-                page.Content()
-                    .PaddingVertical(1, Unit.Centimetre)
-                    .Column(x =>
-                    {
-                        x.Spacing(20);
-                        x.Item().Text(Placeholders.LoremIpsum());
-                        x.Item().Image(Placeholders.Image(200, 100));
-                    });
-
-                page.Footer()
-                    .AlignCenter()
-                    .Text(x =>
-                    {
-                        x.Span("Page ");
-                        x.CurrentPageNumber();
-                    });
+                page.DefaultTextStyle(x => x.FontSize(12));
+                
+                
             });
+            
         });
         Document.ShowInPreviewerAsync();
     }
