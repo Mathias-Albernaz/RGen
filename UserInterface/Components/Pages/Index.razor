@@ -18,20 +18,21 @@
         <DataAnnotationsValidator/>
         <MudCard>
             <MudCardContent>
-                <MudTextField Label="Titulo" HelperText="Max. 50 characters"
+                <MudTextField Label="Titulo*" HelperText="Max. 50 characters"
                               @bind-Value="model.Titulo" For="@(() => model.Titulo)"/>
-                <MudTextField Label="Autor" HelperText="Iniciales" Class="mt-3"
+                <MudTextField Label="Autor*" HelperText="Iniciales" Class="mt-3"
                               @bind-Value="model.Autor" For="@(() => model.Autor)"/>
-                <MudTextField Label="Destinatario" Class="mt-3"
+                <MudTextField Label="Destinatario*" Class="mt-3"
                               @bind-Value="model.Destinatario" For="@(() => model.Destinatario)"/>
-                <MudDatePicker @bind-Date="model.Fecha" />
+                <div style="height: 30px"></div>
+                <MudDatePicker @bind-Date="model.Fecha" Label="Fecha de entrega*"/>
                 <MudTextField Label="Detalle" HelperText="Opcional" Class="mt-3"
                               @bind-Value="model.Detalle" For="@(() => model.Detalle)"/>
             </MudCardContent>
         </MudCard>
         <MudDivider DividerType="DividerType.Middle" Class="my-8"/>
         <MudText Typo="Typo.h5" Align="Align.Center">Elementos</MudText>
-        <MudSimpleTable Dense="false" FixedHeader="true" Style="@(true ? "height:200px;" : "")" Striped="true">
+        <MudSimpleTable Dense="false" FixedHeader="true" Style="@(true ? "height:200px;" : "")" Striped="true" Outlined="true">
             <thead>
             <tr>
                 @foreach (var h in headings)
@@ -54,7 +55,7 @@
         </MudSimpleTable>
         <MudButton ButtonType="ButtonType.Button" Variant="Variant.Text" Color="Color.Primary" Size="Size.Small" Class="ml-auto" @onclick="OpenDialogAsync">Agregar Item</MudButton>
 
-        <MudDivider DividerType="DividerType.Middle" Class="my-5"/>
+        <MudDivider DividerType="DividerType.Middle" Class="my-1"/>
         <MudCardActions>
             <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" Size="Size.Medium" FullWidth="true">Crear</MudButton>
         </MudCardActions>
