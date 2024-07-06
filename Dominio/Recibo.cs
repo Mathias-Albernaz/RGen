@@ -5,8 +5,7 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using QuestPDF.Previewer;
 
-
-public class Recibo
+internal class Recibo : IDocument
 {
     List<Item> items;
     
@@ -18,19 +17,10 @@ public class Recibo
     public Recibo()
     {
         QuestPDF.Settings.License = LicenseType.Community;
-        Document = Document.Create(container =>
-        {
-            container.Page(page =>
-            {
-                page.Size(PageSizes.A4);
-                page.Margin(2, Unit.Centimetre);
-                page.PageColor(Colors.White);
-                page.DefaultTextStyle(x => x.FontSize(12));
-                
-                
-            });
-            
-        });
-        Document.ShowInPreviewerAsync();
+    }
+
+    public void Compose(IDocumentContainer container)
+    {
+        throw new NotImplementedException();
     }
 }
