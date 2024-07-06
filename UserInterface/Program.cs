@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMudServices();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddSingleton<ItemMemoryRepo>();
+builder.Services.AddSingleton<ItemRepo>();
 
 
 var app = builder.Build();

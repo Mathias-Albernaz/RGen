@@ -1,4 +1,4 @@
-@inject ItemMemoryRepo ItemMemoryRepo
+@inject ItemRepo ItemRepo
 
 @inject ISnackbar Snackbar
 
@@ -40,7 +40,7 @@
     {
         if (identificador != "" && descripcion != "")
         {
-            ItemMemoryRepo.addItem(cantidad,descripcion,identificador);
+            ItemRepo.addItem(cantidad,descripcion,identificador);
             MudDialog.Close(DialogResult.Ok(true));
         }
         else

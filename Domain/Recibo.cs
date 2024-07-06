@@ -5,20 +5,20 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using QuestPDF.Previewer;
 
-public class Recipit
+public class Recibo
 {
     private List<Item> _items;
-    private Data _data;
-    public Document GeneratedRecipit { get; set; }
+    private Datos _datos;
+    public Document ReciboGenerado { get; set; }
 
-    public Recipit(List<Item>? items, Data? data)
+    public Recibo(List<Item>? items, Datos? data)
     {
         QuestPDF.Settings.License = LicenseType.Community;
     }
 
     public void CrearRecibo()
     {
-        GeneratedRecipit = Document.Create(recibo =>
+        ReciboGenerado = Document.Create(recibo =>
         {
             recibo.Page(page =>
             {
@@ -62,7 +62,7 @@ public class Recipit
                 });
             });
         });
-        GeneratedRecipit.ShowInPreviewerAsync();
+        ReciboGenerado.ShowInPreviewerAsync();
     }
     
     

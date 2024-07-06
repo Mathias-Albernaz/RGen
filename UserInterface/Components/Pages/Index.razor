@@ -5,7 +5,7 @@
 @using Dominio
 @using QuestPDF.Fluent
 @using UserInterface.Components.Shared
-@inject ItemMemoryRepo ItemMemoryRepo
+@inject ItemRepo ItemRepo
 @inject IDialogService DialogService
 
 <MudPopoverProvider/>
@@ -67,7 +67,7 @@
     List<Item> items;
     Form model = new Form();
     bool success;
-    Recipit recipit = new Recipit(null, null);
+    Recibo _recibo = new Recibo(null, null);
 
     string[] headings = { "Cantidad" ,"Descripcion", "Identificador" };
     
@@ -75,9 +75,9 @@
     
     protected override void OnInitialized()
     {
-        items = ItemMemoryRepo.listItems();
+        items = ItemRepo.listItems();
         model.Fecha = DateTime.Today;
-        recipit.CrearRecibo();
+        _recibo.CrearRecibo();
         StateHasChanged();
     }
 

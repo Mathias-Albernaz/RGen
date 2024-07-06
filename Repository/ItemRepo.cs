@@ -1,11 +1,11 @@
 ﻿namespace Repository;
 using Dominio;
 
-public class ItemMemoryRepo
+public class ItemRepo
 {
     public List<Item> Items { get; set; }
 
-    public ItemMemoryRepo()
+    public ItemRepo()
     {
         Items = new List<Item>();
     }
