@@ -1,6 +1,6 @@
 namespace Dominio;
 
-public class Datos
+public class Data
 {
     public string Titulo { get; set; }
     public string Autor { get; set; }
