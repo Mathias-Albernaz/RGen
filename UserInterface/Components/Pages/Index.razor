@@ -42,7 +42,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach (var row in items)
+            @foreach (var row in _items)
             {
                 <tr>
                     @foreach (var x in row.ToString().Split(","))
@@ -64,10 +64,10 @@
 
 
 @code {
-    List<Item> items;
+    List<Item> _items;
+    Datos _datos;
     Form model = new Form();
     bool success;
-    Recibo _recibo = new Recibo(null, null);
 
     string[] headings = { "Cantidad" ,"Descripcion", "Identificador" };
     
@@ -75,7 +75,8 @@
     
     protected override void OnInitialized()
     {
-        items = ItemRepo.Listar();
+        _items = ItemRepo.Listar();
+        _datos = new Datos();
         model.Fecha = DateTime.Today;
         StateHasChanged();
     }
@@ -102,7 +103,14 @@
 
     private void OnValidSubmit(EditContext context)
     {
+        _datos.Titulo = model.Titulo;
+        _datos.Autor = model.Autor;
+        _datos.Destinatario = model.Destinatario;
+        _datos.Fecha = model.Fecha;
+        _datos.Detalle = model.Detalle;
+        
         success = true;
+        Recibo _recibo = new Recibo(_items, _datos);
         _recibo.CrearRecibo();
         StateHasChanged();
     }
