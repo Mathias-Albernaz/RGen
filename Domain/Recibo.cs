@@ -3,12 +3,12 @@ namespace Dominio;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
-using QuestPDF.Previewer;
+
 
 public class Recibo
 {
     private List<Item>? _items;
-    private Datos _datos;
+    private Datos? _datos;
     public Document ReciboGenerado { get; set; }
 
     public Recibo(List<Item>? items, Datos? data)
@@ -31,7 +31,7 @@ public class Recibo
                 {
                     row.RelativeItem(200).Column(fil =>
                     {
-                        fil.Item().Text($"Recibo #12").Bold().FontSize(16);
+                        fil.Item().Text($"Recibo #1").ExtraBold().FontSize(16);
                         fil.Item().Text($"NP,{_datos.Autor}").FontSize(12);
                         fil.Item().Text($"{_datos.Fecha:d}").FontSize(12);
                         fil.Item().Text("Sección Informática DIPN").FontSize(12);
@@ -78,7 +78,7 @@ public class Recibo
                         {
                             
                             header.Cell().Background(Colors.Grey.Darken1).Padding(3).Text("#").FontColor("#fff").FontSize(10).Bold();
-                            header.Cell().Background(Colors.Grey.Darken1).Padding(3).Text("Detalle").FontColor("#fff").FontSize(10).Bold();
+                            header.Cell().Background(Colors.Grey.Darken1).Padding(3).Text("Descripción").FontColor("#fff").FontSize(10).Bold();
                             header.Cell().Background(Colors.Grey.Darken1).Padding(3).Text("Identificador").FontColor("#fff").FontSize(10).Bold();
                         });
                         foreach (var elem in _items)
@@ -101,7 +101,7 @@ public class Recibo
                     {
                         col.Spacing(5);
                         col.Item().Text("Observaciones").FontSize(10);
-                        col.Item().Text($"{_datos.Detalle}").FontSize(10);
+                        col.Item().Text($"{_datos.Observacion}").FontSize(10);
                     });
                 });
                 
@@ -114,7 +114,7 @@ public class Recibo
             });
             
         });
-        ReciboGenerado.GeneratePdf($"C:\\Users\\mathi\\Desktop\\{_datos.Titulo}.pdf");
+        ReciboGenerado.GeneratePdf($"C:\\Users\\mathi\\Desktop\\{_datos.Titulo} {_datos.Fecha:dd-MM-yy} #1.pdf");
         ReciboGenerado.GeneratePdfAndShow();
     }
     

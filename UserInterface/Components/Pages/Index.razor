@@ -18,16 +18,16 @@
         <DataAnnotationsValidator/>
         <MudCard>
             <MudCardContent>
-                <MudTextField Label="Titulo*" HelperText="Max. 50 characters"
-                              @bind-Value="model.Titulo" For="@(() => model.Titulo)"/>
-                <MudTextField Label="Autor*" HelperText="Iniciales" Class="mt-3"
+                <MudTextField MaxLength="50" Label="Titulo*" HelperText="Max. 50 characters"
+                              @bind-Value="model.Titulo" For="@(() => model.Titulo)" />
+                <MudTextField MaxLength="2" Label="Autor*" HelperText="Iniciales" Class="mt-3"
                               @bind-Value="model.Autor" For="@(() => model.Autor)"/>
                 <MudTextField Label="Destinatario*" Class="mt-3"
                               @bind-Value="model.Destinatario" For="@(() => model.Destinatario)"/>
                 <div style="height: 30px"></div>
                 <MudDatePicker @bind-Date="model.Fecha" Label="Fecha de entrega*"/>
-                <MudTextField Label="Detalle" HelperText="Opcional" Class="mt-3"
-                              @bind-Value="model.Detalle" For="@(() => model.Detalle)"/>
+                <MudTextField Label="Observaciones" HelperText="Opcional" Class="mt-3"
+                              @bind-Value="model.Observacion" For="@(() => model.Observacion)"/>
             </MudCardContent>
         </MudCard>
         <MudDivider DividerType="DividerType.Middle" Class="my-8"/>
@@ -97,17 +97,17 @@
         [Required] 
         public DateTime? Fecha { get; set; }
         
-        public string Detalle { get; set; }
+        public string Observacion { get; set; }
         
     }
 
     private void OnValidSubmit(EditContext context)
     {
         _datos.Titulo = model.Titulo;
-        _datos.Autor = model.Autor;
+        _datos.Autor = model.Autor.ToLower();
         _datos.Destinatario = model.Destinatario;
         _datos.Fecha = model.Fecha;
-        _datos.Detalle = model.Detalle;
+        _datos.Observacion = model.Observacion;
         
         success = true;
         Recibo _recibo = new Recibo(_items, _datos);
