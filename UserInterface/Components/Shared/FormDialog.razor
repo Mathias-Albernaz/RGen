@@ -40,7 +40,7 @@
     {
         if (identificador != "" && descripcion != "")
         {
-            ItemRepo.addItem(cantidad,descripcion,identificador);
+            ItemRepo.NuevoItem(cantidad,descripcion,identificador);
             MudDialog.Close(DialogResult.Ok(true));
         }
         else

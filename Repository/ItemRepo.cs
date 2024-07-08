@@ -10,7 +10,7 @@ public class ItemRepo
         Items = new List<Item>();
     }
 
-    public void addItem(int cantidad, string descripcion, string id)
+    public void NuevoItem(int cantidad, string descripcion, string id)
     {
         if (!Items.Exists(i => i.Identificador == id))
         {
@@ -24,7 +24,7 @@ public class ItemRepo
         }
     }
 
-    public List<Item> listItems()
+    public List<Item> Listar()
     {
         return Items;
     }

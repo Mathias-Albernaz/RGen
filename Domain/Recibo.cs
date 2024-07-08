@@ -36,33 +36,76 @@ public class Recibo
                     });
                     row.ConstantItem(80).Height(60).Width(80).Placeholder();
                 });
-                page.Content().Row(row =>
+                page.Content().Column(column =>
                 {
-                    
-                    row.RelativeItem().Column(fil =>
+                    column.Spacing(30);
+                    column.Item().Row(row =>
                     {
+                        row.RelativeItem().Column(fil =>
+                        {
                         
-                        fil.Spacing(8);
-                        fil.Item().Text("Entrega Secc Informatica DIPN").Bold().FontSize(12);
-                        fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
-                        fil.Item().Text("Firma:").FontSize(9);
-                        fil.Item().Text("Contrafirma:").FontSize(9);
-                        fil.Item().Text("Grado:").FontSize(9);
+                            fil.Spacing(12);
+                            fil.Item().Text("Entrega Secc Informatica DIPN").Bold().FontSize(12);
+                            fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+                            fil.Item().Text("Firma: ....................................").FontSize(9);
+                            fil.Item().Text("Contrafirma:").FontSize(9);
+                            fil.Item().Text("Grado:").FontSize(9);
+                        });
+                        row.ConstantItem(100);
+                        row.RelativeItem().Column(fil =>
+                        {
+                            fil.Spacing(12);
+                            fil.Item().Text("Recibe UCC").Bold().FontSize(12);
+                            fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+                            fil.Item().Text("Firma:").FontSize(9);
+                            fil.Item().Text("Contrafirma:").FontSize(9);
+                            fil.Item().Text("Grado:").FontSize(9);
+                        });
+                  
                     });
-                    row.ConstantItem(100);
-                    row.RelativeItem().Column(fil =>
+                    column.Item().Table(table =>
                     {
-                        fil.Spacing(8);
-                        fil.Item().Text("Recibe UCC").Bold().FontSize(12);
-                        fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
-                        fil.Item().Text("Firma:").FontSize(9);
-                        fil.Item().Text("Contrafirma:").FontSize(9);
-                        fil.Item().Text("Grado:").FontSize(9);
+                        table.ColumnsDefinition(column =>
+                        {
+                            column.RelativeColumn(2);
+                            column.RelativeColumn();
+                        });
+                        table.Header(header =>
+                        {
+                            header.Cell().Background(Colors.Grey.Darken1).Text("Detalle").FontColor("#fff");
+                            header.Cell().Background(Colors.Grey.Darken1).Text("ID").FontColor("#fff");
+                        });
+                        table.Cell().Background(Colors.Grey.Lighten3).Padding(2).Text("Elemento1");
+                        table.Cell().Background(Colors.Grey.Lighten3).Padding(2).Text("ABC11112222" );
+                        table.Cell().Padding(2).Text("Elemento2");
+                        table.Cell().Padding(2).Text("Elemento2");
+                        table.Cell().Padding(2).Background(Colors.Grey.Lighten3).Text("Elemento1");
+                        table.Cell().Padding(2).Background(Colors.Grey.Lighten3).Text("Elemento1");
+                        table.Cell().Padding(2).Text("Elemento2");
+                        table.Cell().Padding(2).Text("Elemento2");
+                        table.Cell().Padding(2).Background(Colors.Grey.Lighten3).Text("Elemento1");
+                        table.Cell().Padding(2).Background(Colors.Grey.Lighten3).Text("Elemento1");
+                        table.Cell().Padding(2).Text("Elemento2");
+                        table.Cell().Padding(2).Text("Elemento2");
+                    });
+                    column.Item().Container().Background(Colors.Grey.Lighten3).Padding(10).Column(col =>
+                    {
+                        col.Spacing(5);
+                        col.Item().Text("Observaciones").FontSize(14);
+                        col.Item().Text("Las observaciones irian aca");
                     });
                 });
+                
+                page.Footer().Column(col =>
+                {
+                    col.Item().LineHorizontal(1).LineColor(Colors.Grey.Medium);
+                    col.Item().Text("20304561").AlignCenter();
+                    col.Item().Text("Maldonado 1121").AlignCenter();
+                });
             });
+            
         });
-        ReciboGenerado.ShowInPreviewerAsync();
+        ReciboGenerado.GeneratePdfAndShow();
     }
     
     

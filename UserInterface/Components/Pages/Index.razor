@@ -75,9 +75,8 @@
     
     protected override void OnInitialized()
     {
-        items = ItemRepo.listItems();
+        items = ItemRepo.Listar();
         model.Fecha = DateTime.Today;
-        _recibo.CrearRecibo();
         StateHasChanged();
     }
 
@@ -104,6 +103,7 @@
     private void OnValidSubmit(EditContext context)
     {
         success = true;
+        _recibo.CrearRecibo();
         StateHasChanged();
     }
     
@@ -112,7 +112,7 @@
         var options = new DialogOptions { CloseOnEscapeKey = true };
         var dialog = DialogService.Show<FormDialog>("Agregar Elemento", options);
         var result = await dialog.Result;
-
+    
         if (!result.Cancelled)
         {
             StateHasChanged();
