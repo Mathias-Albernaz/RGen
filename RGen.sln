@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{31B77726-7668-466A-9192-8BD89E7FEC5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{31B77726-7668-466A-9192-8BD89E7FEC5C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface", "UserInterface\UserInterface.csproj", "{3616660B-719C-4B90-B49C-8D37168665C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{0276E39D-46B3-44D4-89EB-F79E8D9BBC73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorio", "Repositorio\Repositorio.csproj", "{0276E39D-46B3-44D4-89EB-F79E8D9BBC73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{A50D210B-C172-45B5-BE3B-54D05544CB18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "Logica\Logica.csproj", "{A50D210B-C172-45B5-BE3B-54D05544CB18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

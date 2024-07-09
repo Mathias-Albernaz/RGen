@@ -114,7 +114,7 @@ public class Recibo
             });
             
         });
-        ReciboGenerado.GeneratePdf($"C:\\Users\\M.Albernaz\\Documents\\{_datos.Titulo} {_datos.Fecha:dd-MM-yy} #1.pdf");
+        ReciboGenerado.GeneratePdf($"{_datos.Titulo} {_datos.Fecha:dd-MM-yy} #1.pdf");
         ReciboGenerado.GeneratePdfAndShow();
     }
     
