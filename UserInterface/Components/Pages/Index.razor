@@ -56,6 +56,12 @@
         <MudButton ButtonType="ButtonType.Button" Variant="Variant.Text" Color="Color.Primary" Size="Size.Small" Class="ml-auto" @onclick="OpenDialogAsync">Agregar Item</MudButton>
 
         <MudDivider DividerType="DividerType.Middle" Class="my-1"/>
+        @if (!completado)
+        {
+            <MudContainer Style="display: flex; justify-content: center">
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true"/>
+            </MudContainer>
+        }
         <MudCardActions>
             <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" Size="Size.Medium" FullWidth="true">Crear</MudButton>
         </MudCardActions>
@@ -68,6 +74,8 @@
     Datos _datos;
     Form model = new Form();
     bool success;
+    bool completado;
+    Recibo _recibo;
 
     string[] headings = { "Cantidad" ,"Descripcion", "Identificador" };
     
@@ -75,6 +83,7 @@
     
     protected override void OnInitialized()
     {
+        completado = true;
         _items = ItemRepo.Listar();
         _datos = new Datos();
         model.Fecha = DateTime.Today;
@@ -101,8 +110,9 @@
         
     }
 
-    private void OnValidSubmit(EditContext context)
+    private async void OnValidSubmit(EditContext context)
     {
+        completado = false;
         _datos.Titulo = model.Titulo;
         _datos.Autor = model.Autor.ToLower();
         _datos.Destinatario = model.Destinatario;
@@ -110,8 +120,10 @@
         _datos.Observacion = model.Observacion;
         
         success = true;
-        Recibo _recibo = new Recibo(_items, _datos);
+        _recibo = new Recibo(_items, _datos);
         _recibo.CrearRecibo();
+        await Task.Delay(5000);
+        completado = true;
         StateHasChanged();
     }
     
