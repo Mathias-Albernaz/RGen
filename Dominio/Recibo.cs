@@ -7,14 +7,15 @@ using QuestPDF.Infrastructure;
 
 public class Recibo
 {
-    private List<Item>? _items;
-    private Datos? _datos;
+    public int Id { get; set; }
+    public List<Item> Items { get; set; }
+    public Datos Datos { get; set; }
     public Document ReciboGenerado { get; set; }
 
     public Recibo(List<Item>? items, Datos? data)
     {
-        _items = items;
-        _datos = data;
+        Items = items;
+        Datos = data;
         QuestPDF.Settings.License = LicenseType.Community;
     }
 
@@ -32,8 +33,8 @@ public class Recibo
                     row.RelativeItem(200).Column(fil =>
                     {
                         fil.Item().Text($"Recibo #1").ExtraBold().FontSize(16);
-                        fil.Item().Text($"NP,{_datos.Autor}").FontSize(12);
-                        fil.Item().Text($"{_datos.Fecha:d}").FontSize(12);
+                        fil.Item().Text($"NP,{Datos.Autor}").FontSize(12);
+                        fil.Item().Text($"{Datos.Fecha:d}").FontSize(12);
                         fil.Item().Text("Sección Informática DIPN").FontSize(12);
                         fil.Item().Height(40);
                     });
@@ -58,7 +59,7 @@ public class Recibo
                         row.RelativeItem().Column(fil =>
                         {
                             fil.Spacing(12);
-                            fil.Item().Text($"Recibe {_datos.Destinatario}").Bold().FontSize(12);
+                            fil.Item().Text($"Recibe {Datos.Destinatario}").Bold().FontSize(12);
                             fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
                             fil.Item().Text("Firma: ..............................................").FontSize(9);
                             fil.Item().Text("Contrafirma: ...................................").FontSize(9);
@@ -81,9 +82,9 @@ public class Recibo
                             header.Cell().Background(Colors.Grey.Darken1).Padding(3).Text("Descripción").FontColor("#fff").FontSize(10).Bold();
                             header.Cell().Background(Colors.Grey.Darken1).Padding(3).Text("Identificador").FontColor("#fff").FontSize(10).Bold();
                         });
-                        foreach (var elem in _items)
+                        foreach (var elem in Items)
                         {
-                            if ((_items.IndexOf(elem) % 2) == 0)
+                            if ((Items.IndexOf(elem) % 2) == 0)
                             {
                                 table.Cell().Background(Colors.Grey.Lighten3).Padding(2).Text($"{elem.Cantidad:N0}").FontSize(10);
                                 table.Cell().Background(Colors.Grey.Lighten3).Padding(2).Text($"{elem.Descripcion}" ).FontSize(10);
@@ -101,7 +102,7 @@ public class Recibo
                     {
                         col.Spacing(5);
                         col.Item().Text("Observaciones").FontSize(10);
-                        col.Item().Text($"{_datos.Observacion}").FontSize(10);
+                        col.Item().Text($"{Datos.Observacion}").FontSize(10);
                     });
                 });
                 
@@ -114,7 +115,7 @@ public class Recibo
             });
             
         });
-        ReciboGenerado.GeneratePdf($"{_datos.Titulo} {_datos.Fecha:dd-MM-yy} #1.pdf");
+        ReciboGenerado.GeneratePdf($"{Datos.Titulo} {Datos.Fecha:dd-MM-yy} #1.pdf");
         ReciboGenerado.GeneratePdfAndShow();
     }
     
