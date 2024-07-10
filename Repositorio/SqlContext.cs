@@ -9,6 +9,13 @@ public class SqlContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
+        modelBuilder.Entity<Recibo>()
+            .HasKey(r => r.Id);
+
+        modelBuilder.Entity<Recibo>()
+            .HasOne<Datos>();
+
+        modelBuilder.Entity<Recibo>()
+            .HasMany<Item>();
     }
 }
