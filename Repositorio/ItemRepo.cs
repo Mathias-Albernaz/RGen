@@ -1,5 +1,6 @@
-﻿namespace Repository;
-using Dominio;
+﻿using Dominio;
+
+namespace Repositorio;
 
 public class ItemRepo
 {

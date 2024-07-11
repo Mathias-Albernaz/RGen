@@ -1,6 +1,6 @@
 using UserInterface.Components;
 using MudBlazor.Services;
-using Repository;
+using Repositorio;
 
 
 var builder = WebApplication.CreateBuilder(args);

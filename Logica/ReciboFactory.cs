@@ -1,6 +1,6 @@
 ﻿using Dominio;
 
-namespace Logic;
+namespace Logica;
 
 public class ReciboFactory
 {
