@@ -1,6 +1,8 @@
+using Logica;
 using UserInterface.Components;
 using MudBlazor.Services;
 using Repositorio;
+using Logica;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,7 @@ builder.Services.AddMudServices();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddSingleton<ItemRepo>();
+builder.Services.AddSingleton<ReciboFactory>();
 
 
 var app = builder.Build();

@@ -3,10 +3,12 @@
 
 @using System.ComponentModel.DataAnnotations
 @using Dominio
+@using Logica
 @using QuestPDF.Fluent
 @using Repositorio
 @using UserInterface.Components.Shared
 @inject ItemRepo ItemRepo
+@inject ReciboFactory ReciboFactory
 @inject IDialogService DialogService
 
 <MudPopoverProvider/>
@@ -76,14 +78,11 @@
     Form model = new Form();
     bool success;
     bool completado;
-    PlantillaRecibo _plantillaRecibo;
-
-    string[] headings = { "Cantidad" ,"Descripcion", "Identificador" };
-    
-    
+    string[] headings = { "Cantidad", "Descripcion", "Identificador" };
     
     protected override void OnInitialized()
     {
+        
         completado = true;
         _items = ItemRepo.Listar();
         _datos = new Datos();
@@ -121,8 +120,7 @@
         _datos.Observacion = model.Observacion;
         
         success = true;
-        _plantillaRecibo = new PlantillaRecibo(_items, _datos);
-        _plantillaRecibo.CrearRecibo();
+        ReciboFactory.CrearRecibo(_items, _datos); 
         await Task.Delay(5000);
         completado = true;
         StateHasChanged();

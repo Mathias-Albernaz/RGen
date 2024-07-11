@@ -6,7 +6,8 @@ public class ReciboFactory
 {
       public void CrearRecibo(List<Item> items, Datos datos)
       {
-            //TryCatch
-            PlantillaRecibo plantillaRecibo = new PlantillaRecibo(items, datos);
+            Recibo recibo = new Recibo(items, datos);
+            PlantillaRecibo plantillaRecibo = new PlantillaRecibo(recibo);
+            plantillaRecibo.GenerarRecibo();
       }
 }

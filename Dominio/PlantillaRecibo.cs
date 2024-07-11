@@ -7,23 +7,19 @@ using QuestPDF.Infrastructure;
 
 public class PlantillaRecibo
 {
-    public int Id { get; set; }
     public List<Item> Items { get; set; }
     public Datos Datos { get; set; }
     public Document ReciboGenerado { get; set; }
 
-    public PlantillaRecibo()
+    public PlantillaRecibo(Recibo recibo)
     {
-        Items = new List<Item>();
-    }
-    public PlantillaRecibo(List<Item>? items, Datos? data)
-    {
-        Items = items;
-        Datos = data;
         QuestPDF.Settings.License = LicenseType.Community;
+        Items = recibo.Items;
+        Datos = recibo.Datos;
     }
+    
 
-    public void CrearRecibo()
+    public void GenerarRecibo()
     {
         ReciboGenerado = Document.Create(recibo =>
         {
