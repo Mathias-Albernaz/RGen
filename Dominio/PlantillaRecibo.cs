@@ -5,18 +5,18 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
 
-public class Recibo
+public class PlantillaRecibo
 {
     public int Id { get; set; }
     public List<Item> Items { get; set; }
     public Datos Datos { get; set; }
     public Document ReciboGenerado { get; set; }
 
-    public Recibo()
+    public PlantillaRecibo()
     {
         Items = new List<Item>();
     }
-    public Recibo(List<Item>? items, Datos? data)
+    public PlantillaRecibo(List<Item>? items, Datos? data)
     {
         Items = items;
         Datos = data;

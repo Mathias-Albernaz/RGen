@@ -76,7 +76,7 @@
     Form model = new Form();
     bool success;
     bool completado;
-    Recibo _recibo;
+    PlantillaRecibo _plantillaRecibo;
 
     string[] headings = { "Cantidad" ,"Descripcion", "Identificador" };
     
@@ -121,8 +121,8 @@
         _datos.Observacion = model.Observacion;
         
         success = true;
-        _recibo = new Recibo(_items, _datos);
-        _recibo.CrearRecibo();
+        _plantillaRecibo = new PlantillaRecibo(_items, _datos);
+        _plantillaRecibo.CrearRecibo();
         await Task.Delay(5000);
         completado = true;
         StateHasChanged();
