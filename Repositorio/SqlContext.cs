@@ -14,6 +14,12 @@ public class SqlContext : DbContext
             .HasKey(d => d.Id);
         modelBuilder.Entity<Item>()
             .HasKey(i => i.Id);
+        modelBuilder.Entity<Recibo>()
+            .HasKey(r => r.Id);
+        modelBuilder.Entity<Recibo>()
+            .HasOne<Datos>()
+            .WithOne()
+            .HasForeignKey<Datos>(d => d.Id);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

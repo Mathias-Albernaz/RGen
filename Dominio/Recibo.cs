@@ -2,6 +2,7 @@ namespace Dominio;
 
 public class Recibo
 {
+    public int Id { get; set; }
     public List<Item> Items { get; set; }
     public Datos Datos { get; set; }
 
