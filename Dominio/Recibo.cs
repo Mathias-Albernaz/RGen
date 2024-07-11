@@ -12,6 +12,10 @@ public class Recibo
     public Datos Datos { get; set; }
     public Document ReciboGenerado { get; set; }
 
+    public Recibo()
+    {
+        Items = new List<Item>();
+    }
     public Recibo(List<Item>? items, Datos? data)
     {
         Items = items;
