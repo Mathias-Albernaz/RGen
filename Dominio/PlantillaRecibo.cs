@@ -38,7 +38,7 @@ public class PlantillaRecibo
                         fil.Item().Text("Sección Informática DIPN").FontSize(12);
                         fil.Item().Height(40);
                     });
-                    row.ConstantItem(80).Height(60).Width(80).Placeholder();
+                    row.ConstantItem(60).Image(@"..\UserInterface\Components\images\Logo.png");
                 });
                 page.Content().Column(column =>
                 {
@@ -51,9 +51,9 @@ public class PlantillaRecibo
                             fil.Spacing(12);
                             fil.Item().Text("Entrega Secc Informatica DIPN").Bold().FontSize(12);
                             fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
-                            fil.Item().Text("Firma: ...............................................").FontSize(9);
-                            fil.Item().Text("Contrafirma: ...................................").FontSize(9);
-                            fil.Item().Text("Grado: ..............................................").FontSize(9);
+                            fil.Item().Text("Firma: ......................................................................").FontSize(9);
+                            fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
+                            fil.Item().Text("Grado: .....................................................................").FontSize(9);
                         });
                         row.ConstantItem(100);
                         row.RelativeItem().Column(fil =>
@@ -61,9 +61,9 @@ public class PlantillaRecibo
                             fil.Spacing(12);
                             fil.Item().Text($"Recibe {Datos.Destinatario}").Bold().FontSize(12);
                             fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
-                            fil.Item().Text("Firma: ..............................................").FontSize(9);
-                            fil.Item().Text("Contrafirma: ...................................").FontSize(9);
-                            fil.Item().Text("Grado: ..............................................").FontSize(9);
+                            fil.Item().Text("Firma: ......................................................................").FontSize(9);
+                            fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
+                            fil.Item().Text("Grado: .....................................................................").FontSize(9);
                         });
                   
                     });

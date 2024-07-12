@@ -121,8 +121,9 @@
         
         success = true;
         ReciboFactory.CrearRecibo(_items, _datos); 
-        await Task.Delay(5000);
+        await Task.Delay(10000);
         completado = true;
+        model = new Form();
         StateHasChanged();
     }
     

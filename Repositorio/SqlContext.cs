@@ -5,6 +5,7 @@ namespace Repositorio;
 
 public class SqlContext : DbContext
 {
+    public DbSet<Recibo> Recibos { get; set; }
     public DbSet<Datos> Datos { get; set; }
     public DbSet<Item> Item { get; set; }
 
@@ -27,6 +28,6 @@ public class SqlContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite(@"..\UserInterface\Data");
+        optionsBuilder.UseSqlite(@"Data Source=..\UserInterface\Data\RGenDb.db");
     }
 }
