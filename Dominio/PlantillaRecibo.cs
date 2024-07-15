@@ -43,30 +43,7 @@ public class PlantillaRecibo
                 page.Content().Column(column =>
                 {
                     column.Spacing(30);
-                    column.Item().Row(row =>
-                    {
-                        row.RelativeItem().Column(fil =>
-                        {
-                        
-                            fil.Spacing(12);
-                            fil.Item().Text("Entrega Secc Informatica DIPN").Bold().FontSize(12);
-                            fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
-                            fil.Item().Text("Firma: ......................................................................").FontSize(9);
-                            fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
-                            fil.Item().Text("Grado: .....................................................................").FontSize(9);
-                        });
-                        row.ConstantItem(100);
-                        row.RelativeItem().Column(fil =>
-                        {
-                            fil.Spacing(12);
-                            fil.Item().Text($"Recibe {Datos.Destinatario}").Bold().FontSize(12);
-                            fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
-                            fil.Item().Text("Firma: ......................................................................").FontSize(9);
-                            fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
-                            fil.Item().Text("Grado: .....................................................................").FontSize(9);
-                        });
-                  
-                    });
+                    
                     column.Item().Table(table =>
                     {
                         table.ColumnsDefinition(column =>
@@ -97,6 +74,30 @@ public class PlantillaRecibo
                                 table.Cell().Padding(2).Text($"{elem.Identificador}").FontSize(10);
                             }
                         }
+                    });
+                    column.Item().Row(row =>
+                    {
+                        row.RelativeItem().Column(fil =>
+                        {
+                        
+                            fil.Spacing(12);
+                            fil.Item().Text("Entrega Secc Informatica DIPN").Bold().FontSize(12);
+                            fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+                            fil.Item().Text("Firma: ......................................................................").FontSize(9);
+                            fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
+                            fil.Item().Text("Grado: .....................................................................").FontSize(9);
+                        });
+                        row.ConstantItem(100);
+                        row.RelativeItem().Column(fil =>
+                        {
+                            fil.Spacing(12);
+                            fil.Item().Text($"Recibe {Datos.Destinatario}").Bold().FontSize(12);
+                            fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+                            fil.Item().Text("Firma: ......................................................................").FontSize(9);
+                            fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
+                            fil.Item().Text("Grado: .....................................................................").FontSize(9);
+                        });
+                  
                     });
                     column.Item().Container().Background(Colors.Grey.Lighten3).Padding(10).Column(col =>
                     {
