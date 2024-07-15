@@ -110,7 +110,11 @@ public class PlantillaRecibo
                 page.Footer().Column(col =>
                 {
                     col.Item().LineHorizontal(1).LineColor(Colors.Grey.Medium);
-                    col.Item().Text("20304561").AlignCenter();
+                    col.Item().Column(co =>
+                    {
+                        co.Item().Text("20304561 dipn-adm-informatica@minterior.gub.uy").AlignCenter();
+                        co.Item().Text("").AlignCenter();
+                    });
                     col.Item().Text("Maldonado 1121").AlignCenter();
                 });
             });
