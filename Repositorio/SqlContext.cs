@@ -7,7 +7,7 @@ public class SqlContext : DbContext
 {
     public DbSet<Recibo> Recibos { get; set; }
     public DbSet<Datos> Datos { get; set; }
-    public DbSet<Item> Item { get; set; }
+    public DbSet<Item> Items { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
