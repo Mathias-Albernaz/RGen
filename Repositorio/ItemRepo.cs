@@ -2,32 +2,31 @@
 
 namespace Repositorio;
 
-public class ItemRepo
+public class ItemRepo : IRepositorio<Item>
 {
-    public List<Item> Items { get; set; }
+    private SqlContext _contexto;
 
-    public ItemRepo()
+    public ItemRepo(SqlContext contexto)
     {
-        Items = new List<Item>();
+        _contexto = contexto;
     }
-
-    public void NuevoItem(int cantidad, string descripcion, string id)
+    
+    public void Agregar(Item elemento)
     {
-        if (!Items.Exists(i => i.Identificador == id))
+        _contexto.Add(elemento);
+    }
+    
+    public void Borrar(int id)
+    {
+        if (_contexto.Items.Find(id) != null)
         {
-            Item newItem = new Item()
-            {
-                Cantidad = cantidad,
-                Descripcion = descripcion,
-                Identificador = id
-            };
-            Items.Add(newItem);
+            _contexto.Remove(id);
         }
     }
 
     public List<Item> Listar()
     {
-        return Items;
+        return _contexto.Items.ToList();
     }
     
 }
