@@ -25,4 +25,9 @@ public class DatoRepo : IRepositorio<Datos>
     {
         return _contexto.Datos.ToList();
     }
+
+    public Datos Buscar(int id)
+    {
+        return _contexto.Datos.Find(id);
+    }
 }

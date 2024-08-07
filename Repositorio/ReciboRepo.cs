@@ -28,4 +28,9 @@ public class ReciboRepo : IRepositorio<Recibo>
             .Include(recibo => recibo.Datos)
             .ToList();
     }
+
+    public Recibo Buscar(int id)
+    {
+        return _contexto.Recibos.Find(id);
+    }
 }

@@ -28,5 +28,9 @@ public class ItemRepo : IRepositorio<Item>
     {
         return _contexto.Items.ToList();
     }
-    
+
+    public Item Buscar(int id)
+    {
+        return _contexto.Items.Find(id);
+    }
 }
