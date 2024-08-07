@@ -4,14 +4,14 @@ namespace Logica;
 
 public class ReciboFactory
 {
-      public int Id { get; set; } = 1;
-      public Recibo CrearRecibo(List<Item> items, Datos datos)
+      public int IdNueva { get; set; } = 1;
+      public Recibo Crear(List<Item> items, Datos datos)
       {
             Recibo recibo = new Recibo(items, datos);
-            recibo.Id = Id;
+            recibo.Id = IdNueva;
             PlantillaRecibo plantillaRecibo = new PlantillaRecibo(recibo);
             plantillaRecibo.GenerarRecibo();
-            Id++;
+            IdNueva++;
             return recibo;
       }
 }
