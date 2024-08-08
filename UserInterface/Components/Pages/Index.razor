@@ -125,8 +125,9 @@
         var dialog = DialogService.Show<FormDialog>("Agregar Elemento", options);
         var result = await dialog.Result;
     
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
+            _items = ControladorItems.ListarItems();
             StateHasChanged();
         }
         
