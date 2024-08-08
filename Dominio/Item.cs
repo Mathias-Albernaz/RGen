@@ -7,7 +7,10 @@ public class Item
     public string Descripcion { get; set; }
     public string? Identificador { get; set; }
     
-    public Recibo Recibo { get; set; }
+    //Propiedades de navegacion
+    public Recibo? Recibo { get; set; }
+    public int ReciboId { get; set; }
+    
 
     public override string ToString()
     {

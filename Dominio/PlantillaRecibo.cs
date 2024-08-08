@@ -14,7 +14,7 @@ public class PlantillaRecibo
     public PlantillaRecibo(Recibo recibo)
     {
         QuestPDF.Settings.License = LicenseType.Community;
-        Items = recibo.Items;
+        Items = recibo.Items.ToList();
         Dato = recibo.Dato;
     }
     

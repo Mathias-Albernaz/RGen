@@ -3,7 +3,9 @@ namespace Dominio;
 public class Recibo
 {
     public int Id { get; set; }
-    public List<Item> Items { get; set; }
+    
+    public ICollection<Item> Items { get; set; } = new List<Item>();
+
     public Dato Dato { get; set; }
 
     public Recibo()

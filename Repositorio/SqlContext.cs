@@ -16,14 +16,16 @@ public class SqlContext : DbContext
         modelBuilder.Entity<Item>()
             .HasKey(i => i.Id);
         modelBuilder.Entity<Recibo>()
-            .HasKey(r => r.Id);
-        modelBuilder.Entity<Recibo>()
-            .HasOne(r => r.Dato)
-            .WithOne()
-            .HasForeignKey<Dato>(d => d.Id);
-        modelBuilder.Entity<Recibo>()
             .HasMany(r => r.Items)
-            .WithMany();
+            .WithOne(r => r.Recibo)
+            .HasForeignKey(r => r.ReciboId)
+            .IsRequired(false);
+        modelBuilder.Entity<Recibo>()
+            .HasOne(r => r.Dato) // Un Recibo tiene un Dato
+            .WithOne(d => d.Recibo) // Un Dato tiene un Recibo
+            .HasForeignKey<Recibo>(r => r.Id) // La clave foránea en Recibo
+            .OnDelete(DeleteBehavior.Restrict); 
+        
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
