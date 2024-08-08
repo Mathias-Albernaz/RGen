@@ -9,7 +9,7 @@ public class Item
     
     //Propiedades de navegacion
     public Recibo? Recibo { get; set; }
-    public int ReciboId { get; set; }
+    public int? ReciboId { get; set; }
     
 
     public override string ToString()

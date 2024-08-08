@@ -10,5 +10,5 @@ public class Dato
     public string? Observacion { get; set; }
     
     //propiedad de navegacion
-    public Recibo Recibo { get; set; }
+    public Recibo? Recibo { get; set; }
 }
