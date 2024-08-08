@@ -2,13 +2,13 @@ using Dominio;
 
 namespace Logica;
 
-public class DatosFactory
+public class DatoFactory
 {
     public int IdNueva { get; set; } = 1;
 
-    public Datos Crear(string titulo, string autor, string destinatario, DateTime fecha, string observacion)
+    public Dato Crear(string titulo, string autor, string destinatario, DateTime fecha, string observacion)
     {
-        Datos datos = new Datos()
+        Dato dato = new Dato()
         {
             Titulo = titulo,
             Autor = autor,
@@ -17,6 +17,6 @@ public class DatosFactory
             Id = IdNueva
         };
         IdNueva++;
-        return datos;
+        return dato;
     }
 }

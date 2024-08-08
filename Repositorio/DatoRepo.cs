@@ -2,7 +2,7 @@ using Dominio;
 
 namespace Repositorio;
 
-public class DatoRepo : IRepositorio<Datos>
+public class DatoRepo : IRepositorio<Dato>
 {
     private SqlContext _contexto;
 
@@ -11,7 +11,7 @@ public class DatoRepo : IRepositorio<Datos>
         _contexto = contexto;
     }
     
-    public void Agregar(Datos elemento)
+    public void Agregar(Dato elemento)
     {
         _contexto.Add(elemento);
     }
@@ -21,12 +21,12 @@ public class DatoRepo : IRepositorio<Datos>
         _contexto.Remove(id);
     }
 
-    public List<Datos> Listar()
+    public List<Dato> Listar()
     {
         return _contexto.Datos.ToList();
     }
 
-    public Datos Buscar(int id)
+    public Dato Buscar(int id)
     {
         return _contexto.Datos.Find(id);
     }

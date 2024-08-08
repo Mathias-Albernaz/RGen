@@ -25,7 +25,7 @@ public class ReciboRepo : IRepositorio<Recibo>
     public List<Recibo> Listar()
     {
         return _contexto.Recibos.Include(recibo => recibo.Items)
-            .Include(recibo => recibo.Datos)
+            .Include(recibo => recibo.Dato)
             .ToList();
     }
 

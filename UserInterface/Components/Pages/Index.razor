@@ -74,7 +74,7 @@
 
 @code {
     List<Item> _items;
-    Datos _datos;
+    Dato _dato;
     Form model = new Form();
     bool success;
     bool completado;
@@ -85,7 +85,7 @@
         
         completado = true;
         _items = ItemRepo.Listar();
-        _datos = new Datos();
+        _dato = new Dato();
         model.Fecha = DateTime.Today;
         StateHasChanged();
     }
@@ -113,14 +113,14 @@
     private async void OnValidSubmit(EditContext context)
     {
         completado = false;
-        _datos.Titulo = model.Titulo;
-        _datos.Autor = model.Autor.ToLower();
-        _datos.Destinatario = model.Destinatario;
-        _datos.Fecha = model.Fecha;
-        _datos.Observacion = model.Observacion;
+        _dato.Titulo = model.Titulo;
+        _dato.Autor = model.Autor.ToLower();
+        _dato.Destinatario = model.Destinatario;
+        _dato.Fecha = model.Fecha;
+        _dato.Observacion = model.Observacion;
         
         success = true;
-        ReciboFactory.Crear(_items, _datos); 
+        ReciboFactory.Crear(_items, _dato); 
         await Task.Delay(10000);
         completado = true;
         model = new Form();

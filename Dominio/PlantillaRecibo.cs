@@ -8,14 +8,14 @@ using QuestPDF.Infrastructure;
 public class PlantillaRecibo
 {
     public List<Item> Items { get; set; }
-    public Datos Datos { get; set; }
+    public Dato Dato { get; set; }
     public Document ReciboGenerado { get; set; }
 
     public PlantillaRecibo(Recibo recibo)
     {
         QuestPDF.Settings.License = LicenseType.Community;
         Items = recibo.Items;
-        Datos = recibo.Datos;
+        Dato = recibo.Dato;
     }
     
 
@@ -33,8 +33,8 @@ public class PlantillaRecibo
                     row.RelativeItem(200).Column(fil =>
                     {
                         fil.Item().Text($"Recibo #1").ExtraBold().FontSize(16);
-                        fil.Item().Text($"NP,{Datos.Autor}").FontSize(12);
-                        fil.Item().Text($"{Datos.Fecha:d}").FontSize(12);
+                        fil.Item().Text($"NP,{Dato.Autor}").FontSize(12);
+                        fil.Item().Text($"{Dato.Fecha:d}").FontSize(12);
                         fil.Item().Text("Sección Informática DIPN").FontSize(12);
                         fil.Item().Height(40);
                     });
@@ -59,7 +59,7 @@ public class PlantillaRecibo
                         row.RelativeItem().Column(fil =>
                         {
                             fil.Spacing(12);
-                            fil.Item().Text($"Recibe {Datos.Destinatario}").Bold().FontSize(12);
+                            fil.Item().Text($"Recibe {Dato.Destinatario}").Bold().FontSize(12);
                             fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
                             fil.Item().Text("Firma: ......................................................................").FontSize(9);
                             fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
@@ -102,7 +102,7 @@ public class PlantillaRecibo
                     {
                         col.Spacing(5);
                         col.Item().Text("Observaciones").FontSize(10);
-                        col.Item().Text($"{Datos.Observacion}").FontSize(10);
+                        col.Item().Text($"{Dato.Observacion}").FontSize(10);
                     });
                 });
                 
@@ -115,7 +115,7 @@ public class PlantillaRecibo
             });
             
         });
-        ReciboGenerado.GeneratePdf($"{Datos.Titulo} {Datos.Fecha:dd-MM-yy} #1.pdf");
+        ReciboGenerado.GeneratePdf($"{Dato.Titulo} {Dato.Fecha:dd-MM-yy} #1.pdf");
         ReciboGenerado.GeneratePdfAndShow();
     }
     
