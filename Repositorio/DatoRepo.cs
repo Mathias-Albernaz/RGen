@@ -11,14 +11,17 @@ public class DatoRepo : IRepositorio<Dato>
         _contexto = contexto;
     }
     
-    public void Agregar(Dato elemento)
+    public Dato Agregar(Dato elemento)
     {
         _contexto.Add(elemento);
+        _contexto.SaveChanges();
+        return elemento;
     }
 
     public void Borrar(int id)
     {
         _contexto.Remove(id);
+        _contexto.SaveChanges();
     }
 
     public List<Dato> Listar()

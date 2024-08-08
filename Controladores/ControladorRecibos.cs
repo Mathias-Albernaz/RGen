@@ -15,7 +15,7 @@ public class ControladorRecibos
         _reciboFactory = reciboFactory;
     }
 
-    public void AgregarRecibo(Dato dato, List<Item> items)
+    public void AgregarRecibo(List<Item> items, Dato dato)
     {
         Recibo nuevoRecibo = _reciboFactory.Crear(items, dato);
         _repositorio.Agregar(nuevoRecibo);

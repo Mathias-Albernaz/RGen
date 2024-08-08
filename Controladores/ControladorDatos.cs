@@ -15,10 +15,10 @@ public class ControladorDatos
       _datoFactory = datoFactory;
    }
 
-   public void AgregarDatos(string titulo, string autor, string destinatario, DateTime fecha, string observacion)
+   public Dato AgregarDatos(string titulo, string autor, string destinatario, DateTime? fecha, string observacion)
    {
       Dato nuevoDato = _datoFactory.Crear(titulo, autor, destinatario, fecha, observacion);
-      _repositorio.Agregar(nuevoDato);
+      return _repositorio.Agregar(nuevoDato);
    }
 
    public void BorrarDatos(int id)

@@ -12,14 +12,17 @@ public class ReciboRepo : IRepositorio<Recibo>
         _contexto = contexto;
     }
     
-    public void Agregar(Recibo elemento)
+    public Recibo Agregar(Recibo elemento)
     {
         _contexto.Add(elemento);
+        _contexto.SaveChanges();
+        return elemento;
     }
 
     public void Borrar(int id)
     {
         _contexto.Remove(id);
+        _contexto.SaveChanges();
     }
 
     public List<Recibo> Listar()

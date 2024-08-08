@@ -12,7 +12,7 @@ public class ControladorItems
     public ControladorItems(IRepositorio<Item> repositorioItems, ItemFactory itemFactory)
     {
         _repositorio = repositorioItems;
-        itemFactory = _itemFactory;
+        _itemFactory = itemFactory;
     }
 
     public void AgregarItem(int cantidad, string descripcion, string identificador)

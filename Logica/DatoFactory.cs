@@ -6,7 +6,7 @@ public class DatoFactory
 {
     public int IdNueva { get; set; } = 1;
 
-    public Dato Crear(string titulo, string autor, string destinatario, DateTime fecha, string observacion)
+    public Dato Crear(string titulo, string autor, string destinatario, DateTime? fecha, string observacion)
     {
         Dato dato = new Dato()
         {
