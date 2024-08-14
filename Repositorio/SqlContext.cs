@@ -13,8 +13,22 @@ public class SqlContext : DbContext
     {
         modelBuilder.Entity<Dato>()
             .HasKey(d => d.Id);
+        modelBuilder.Entity<Dato>()
+            .Property(d => d.Id)
+            .ValueGeneratedOnAdd(); // Auto-incrementar al agregar
+
         modelBuilder.Entity<Item>()
             .HasKey(i => i.Id);
+        modelBuilder.Entity<Item>()
+            .Property(i => i.Id)
+            .ValueGeneratedOnAdd(); // Auto-incrementar al agregar
+
+        modelBuilder.Entity<Recibo>()
+            .HasKey(r => r.Id);
+        modelBuilder.Entity<Recibo>()
+            .Property(r => r.Id)
+            .ValueGeneratedOnAdd(); // Auto-incrementar al agregar
+        
         modelBuilder.Entity<Recibo>()
             .HasMany(r => r.Items) // Un Recibo tiene varios Items
             .WithOne(r => r.Recibo) // Un Item tiene un Recibo
