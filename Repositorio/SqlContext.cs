@@ -40,7 +40,7 @@ public class SqlContext : DbContext
             .WithOne(d => d.Recibo) // Un Dato tiene un Recibo
             .HasForeignKey<Recibo>(r => r.Id) // La clave foránea en Recibo
             .IsRequired(false)
-            .OnDelete(DeleteBehavior.Cascade);; 
+            .OnDelete(DeleteBehavior.Cascade);
         
     }
 
