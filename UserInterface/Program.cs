@@ -1,8 +1,12 @@
+using Dominio;
 using Logica;
 using UserInterface.Components;
 using MudBlazor.Services;
 using Repositorio;
+using Controladores;
+    
 using Logica;
+using SQLitePCL;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +15,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMudServices();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddSingleton<ItemRepo>();
+builder.Services.AddDbContext<SqlContext>();
+
+//scoped
+builder.Services.AddScoped<IRepositorio<Dato>,DatoRepo>();
+builder.Services.AddScoped<IRepositorio<Item>,ItemRepo>();
+builder.Services.AddScoped<IRepositorio<Recibo>,ReciboRepo>();
+builder.Services.AddScoped<ControladorDatos>();
+builder.Services.AddScoped<ControladorItems>();
+builder.Services.AddScoped<ControladorRecibos>();
+
+//singleton
+builder.Services.AddSingleton<DatoFactory>();
 builder.Services.AddSingleton<ReciboFactory>();
+builder.Services.AddSingleton<ItemFactory>();
 
 
 var app = builder.Build();

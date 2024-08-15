@@ -17,6 +17,7 @@
 
 
     <ItemGroup>
+      <ProjectReference Include="..\Controladores\Controladores.csproj" />
       <ProjectReference Include="..\Dominio\Dominio.csproj" />
       <ProjectReference Include="..\Logica\Logica.csproj" />
       <ProjectReference Include="..\Repositorio\Repositorio.csproj" />

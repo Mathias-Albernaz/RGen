@@ -2,14 +2,13 @@
 @rendermode InteractiveServer
 
 @using System.ComponentModel.DataAnnotations
+@using Controladores
 @using Dominio
-@using Logica
-@using QuestPDF.Fluent
-@using Repositorio
 @using UserInterface.Components.Shared
-@inject ItemRepo ItemRepo
-@inject ReciboFactory ReciboFactory
 @inject IDialogService DialogService
+@inject ControladorItems ControladorItems
+@inject ControladorDatos ControladorDatos
+@inject  ControladorRecibos ControladorRecibos
 
 <MudPopoverProvider/>
 <MudDialogProvider/>
@@ -74,7 +73,6 @@
 
 @code {
     List<Item> _items;
-    Datos _datos;
     Form model = new Form();
     bool success;
     bool completado;
@@ -84,8 +82,7 @@
     {
         
         completado = true;
-        _items = ItemRepo.Listar();
-        _datos = new Datos();
+        _items = ControladorItems.ListarItems();
         model.Fecha = DateTime.Today;
         StateHasChanged();
     }
@@ -113,14 +110,9 @@
     private async void OnValidSubmit(EditContext context)
     {
         completado = false;
-        _datos.Titulo = model.Titulo;
-        _datos.Autor = model.Autor.ToLower();
-        _datos.Destinatario = model.Destinatario;
-        _datos.Fecha = model.Fecha;
-        _datos.Observacion = model.Observacion;
-        
+        Dato _dato = ControladorDatos.AgregarDatos(model.Titulo, model.Autor, model.Destinatario, model.Fecha, model.Observacion);
         success = true;
-        ReciboFactory.CrearRecibo(_items, _datos); 
+        ControladorRecibos.AgregarRecibo(_items, _dato); 
         await Task.Delay(10000);
         completado = true;
         model = new Form();
@@ -135,8 +127,9 @@
         var dialog = DialogService.Show<FormDialog>("Agregar Elemento", options);
         var result = await dialog.Result;
     
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
+            _items = ControladorItems.ListarItems();
             StateHasChanged();
         }
         

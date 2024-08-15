@@ -8,14 +8,14 @@ using QuestPDF.Infrastructure;
 public class PlantillaRecibo
 {
     public List<Item> Items { get; set; }
-    public Datos Datos { get; set; }
+    public Dato Dato { get; set; }
     public Document ReciboGenerado { get; set; }
 
     public PlantillaRecibo(Recibo recibo)
     {
         QuestPDF.Settings.License = LicenseType.Community;
-        Items = recibo.Items;
-        Datos = recibo.Datos;
+        Items = recibo.Items.ToList();
+        Dato = recibo.Dato;
     }
     
 
@@ -33,8 +33,8 @@ public class PlantillaRecibo
                     row.RelativeItem(200).Column(fil =>
                     {
                         fil.Item().Text($"Recibo #1").ExtraBold().FontSize(16);
-                        fil.Item().Text($"NP,{Datos.Autor}").FontSize(12);
-                        fil.Item().Text($"{Datos.Fecha:d}").FontSize(12);
+                        fil.Item().Text($"NP,{Dato.Autor}").FontSize(12);
+                        fil.Item().Text($"{Dato.Fecha:d}").FontSize(12);
                         fil.Item().Text("Sección Informática DIPN").FontSize(12);
                         fil.Item().Height(40);
                     });
@@ -43,7 +43,30 @@ public class PlantillaRecibo
                 page.Content().Column(column =>
                 {
                     column.Spacing(30);
-                    
+                    column.Item().Row(row =>
+                    {
+                        row.RelativeItem().Column(fil =>
+                        {
+                        
+                            fil.Spacing(12);
+                            fil.Item().Text("Entrega Secc Informatica DIPN").Bold().FontSize(12);
+                            fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+                            fil.Item().Text("Firma: ......................................................................").FontSize(9);
+                            fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
+                            fil.Item().Text("Grado: .....................................................................").FontSize(9);
+                        });
+                        row.ConstantItem(100);
+                        row.RelativeItem().Column(fil =>
+                        {
+                            fil.Spacing(12);
+                            fil.Item().Text($"Recibe {Dato.Destinatario}").Bold().FontSize(12);
+                            fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+                            fil.Item().Text("Firma: ......................................................................").FontSize(9);
+                            fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
+                            fil.Item().Text("Grado: .....................................................................").FontSize(9);
+                        });
+                  
+                    });
                     column.Item().Table(table =>
                     {
                         table.ColumnsDefinition(column =>
@@ -75,52 +98,24 @@ public class PlantillaRecibo
                             }
                         }
                     });
-                    column.Item().Row(row =>
-                    {
-                        row.RelativeItem().Column(fil =>
-                        {
-                        
-                            fil.Spacing(12);
-                            fil.Item().Text("Entrega Secc Informatica DIPN").Bold().FontSize(12);
-                            fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
-                            fil.Item().Text("Firma: ......................................................................").FontSize(9);
-                            fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
-                            fil.Item().Text("Grado: .....................................................................").FontSize(9);
-                        });
-                        row.ConstantItem(100);
-                        row.RelativeItem().Column(fil =>
-                        {
-                            fil.Spacing(12);
-                            fil.Item().Text($"Recibe {Datos.Destinatario}").Bold().FontSize(12);
-                            fil.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
-                            fil.Item().Text("Firma: ......................................................................").FontSize(9);
-                            fil.Item().Text("Contrafirma: ..........................................................").FontSize(9);
-                            fil.Item().Text("Grado: .....................................................................").FontSize(9);
-                        });
-                  
-                    });
                     column.Item().Container().Background(Colors.Grey.Lighten3).Padding(10).Column(col =>
                     {
                         col.Spacing(5);
                         col.Item().Text("Observaciones").FontSize(10);
-                        col.Item().Text($"{Datos.Observacion}").FontSize(10);
+                        col.Item().Text($"{Dato.Observacion}").FontSize(10);
                     });
                 });
                 
                 page.Footer().Column(col =>
                 {
                     col.Item().LineHorizontal(1).LineColor(Colors.Grey.Medium);
-                    col.Item().Column(co =>
-                    {
-                        co.Item().Text("20304561 dipn-adm-informatica@minterior.gub.uy").AlignCenter();
-                        co.Item().Text("").AlignCenter();
-                    });
+                    col.Item().Text("20304561").AlignCenter();
                     col.Item().Text("Maldonado 1121").AlignCenter();
                 });
             });
             
         });
-        ReciboGenerado.GeneratePdf($"{Datos.Titulo} {Datos.Fecha:dd-MM-yy} #1.pdf");
+        ReciboGenerado.GeneratePdf($"{Dato.Titulo} {Dato.Fecha:dd-MM-yy} #1.pdf");
         ReciboGenerado.GeneratePdfAndShow();
     }
     

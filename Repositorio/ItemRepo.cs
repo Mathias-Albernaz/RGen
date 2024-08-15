@@ -2,32 +2,55 @@
 
 namespace Repositorio;
 
-public class ItemRepo
+public class ItemRepo : IRepositorio<Item>
 {
-    public List<Item> Items { get; set; }
+    private SqlContext _contexto;
 
-    public ItemRepo()
+    public ItemRepo(SqlContext contexto)
     {
-        Items = new List<Item>();
+        _contexto = contexto;
     }
-
-    public void NuevoItem(int cantidad, string descripcion, string id)
+    
+    public bool TestConexion()
     {
-        if (!Items.Exists(i => i.Identificador == id))
+        try
         {
-            Item newItem = new Item()
-            {
-                Cantidad = cantidad,
-                Descripcion = descripcion,
-                Identificador = id
-            };
-            Items.Add(newItem);
+            // Ejecuta una consulta simple
+            var canConnect = _contexto.Database.CanConnect();
+            return canConnect;
+        }
+        catch (Exception ex)
+        {
+            // Maneja y registra la excepción
+            Console.WriteLine($"Error al conectar a la base de datos: {ex.Message}");
+            return false;
+        }
+    }
+    
+    public Item Agregar(Item elemento)
+    {
+        TestConexion();
+        _contexto.Add(elemento);
+        _contexto.SaveChanges();
+        return elemento;
+    }
+    
+    public void Borrar(int id)
+    {
+        if (_contexto.Items.Find(id) != null)
+        {
+            _contexto.Remove(id);
+            _contexto.SaveChanges();
         }
     }
 
     public List<Item> Listar()
     {
-        return Items;
+        return _contexto.Items.ToList();
     }
-    
+
+    public Item Buscar(int id)
+    {
+        return _contexto.Items.Find(id);
+    }
 }

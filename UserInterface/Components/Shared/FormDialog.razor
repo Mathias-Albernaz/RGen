@@ -1,5 +1,5 @@
-@using Repositorio
-@inject ItemRepo ItemRepo
+@using Controladores
+@inject ControladorItems ControladorItems
 
 @inject ISnackbar Snackbar
 
@@ -36,12 +36,14 @@
 
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; }
+    
+    
 
     private void Submit()
     {
         if (identificador != "" && descripcion != "")
         {
-            ItemRepo.NuevoItem(cantidad,descripcion,identificador);
+            ControladorItems.AgregarItem(cantidad, descripcion, identificador);
             MudDialog.Close(DialogResult.Ok(true));
         }
         else

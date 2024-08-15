@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorio", "Repositorio\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "Logica\Logica.csproj", "{A50D210B-C172-45B5-BE3B-54D05544CB18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controladores", "Controladores\Controladores.csproj", "{72F539A9-BA3B-46B6-BC87-DF09572FBFAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{A50D210B-C172-45B5-BE3B-54D05544CB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A50D210B-C172-45B5-BE3B-54D05544CB18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A50D210B-C172-45B5-BE3B-54D05544CB18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72F539A9-BA3B-46B6-BC87-DF09572FBFAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72F539A9-BA3B-46B6-BC87-DF09572FBFAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72F539A9-BA3B-46B6-BC87-DF09572FBFAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72F539A9-BA3B-46B6-BC87-DF09572FBFAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
