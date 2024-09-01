@@ -80,9 +80,8 @@
     
     protected override void OnInitialized()
     {
-        
+        _items = new List<Item>();
         completado = true;
-        _items = ControladorItems.ListarItems();
         model.Fecha = DateTime.Today;
         StateHasChanged();
     }
