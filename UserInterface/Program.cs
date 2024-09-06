@@ -20,6 +20,7 @@ builder.Services.AddDbContext<SqlContext>();
 //scoped
 builder.Services.AddScoped<IRepositorio<Dato>,DatoRepo>();
 builder.Services.AddScoped<IRepositorio<Item>,ItemRepo>();
+builder.Services.AddScoped<ItemMemoryRepo>();
 builder.Services.AddScoped<IRepositorio<Recibo>,ReciboRepo>();
 builder.Services.AddScoped<ControladorDatos>();
 builder.Services.AddScoped<ControladorItems>();
