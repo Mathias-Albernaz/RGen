@@ -1,0 +1,52 @@
+@page "/Datos"
+@rendermode InteractiveServer
+
+
+@using Controladores
+@using Dominio
+@inject ControladorDatos ControladorDatos
+
+
+<MudPopoverProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+<MudText Typo="Typo.h2" Align="Align.Center">Recibos</MudText>
+
+<MudContainer MaxWidth="MaxWidth.Large">
+    <MudSimpleTable Dense="false"  Striped="true" Outlined="true" Hover="true">
+        <thead style="background-color: #6E36F4; color: white">
+        <tr>
+            @foreach (var h in headings)
+            {
+                <th>@h</th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Dato dato in _datos)
+        {
+            <tr>
+                <td>@dato.Titulo</td>
+                <td>@dato.Autor</td>
+                <td>@dato.Destinatario</td>
+                <td>@dato.Fecha</td>
+                <td>@dato.Observacion</td>
+            </tr>
+        }
+        </tbody>
+    </MudSimpleTable>
+</MudContainer>
+
+
+
+@code
+{
+    List<Dato> _datos;
+    List<Recibo> _recibos;
+    protected override void OnInitialized()
+    {
+        _datos = ControladorDatos.ListarDatos();
+    }
+
+    string[] headings = { "Titulo", "Autor", "Destinatario", "Fecha", "Observacion" };
+}
