@@ -116,7 +116,7 @@
         ControladorRecibos.AgregarRecibo(_itemsMemoryList, _dato); 
         completado = true;
         model = new Form();
-        _itemsMemoryList.Clear();
+        _itemsMemoryList.RemoveAll(item => true );
         StateHasChanged();
     }
     

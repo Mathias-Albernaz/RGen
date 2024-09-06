@@ -28,12 +28,11 @@ public class SqlContext : DbContext
         modelBuilder.Entity<Recibo>()
             .Property(r => r.Id)
             .ValueGeneratedOnAdd(); // Auto-incrementar al agregar
-        
         modelBuilder.Entity<Recibo>()
             .HasMany(r => r.Items) // Un Recibo tiene varios Items
             .WithOne(r => r.Recibo) // Un Item tiene un Recibo
             .HasForeignKey(r => r.ReciboId) // Clave foranea a Recibo
-            .IsRequired(false)
+            .IsRequired(true)
             .OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<Recibo>()
             .HasOne(r => r.Dato) // Un Recibo tiene un Dato
