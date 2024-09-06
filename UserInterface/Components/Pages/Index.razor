@@ -5,10 +5,12 @@
 @using Controladores
 @using Dominio
 @using UserInterface.Components.Shared
+@using Repositorio
 @inject IDialogService DialogService
 @inject ControladorItems ControladorItems
 @inject ControladorDatos ControladorDatos
 @inject  ControladorRecibos ControladorRecibos
+@inject ItemMemoryRepo ItemMemoryRepo
 
 <MudPopoverProvider/>
 <MudDialogProvider/>
@@ -44,7 +46,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach (var row in _items)
+            @foreach (var row in _itemsMemoryList)
             {
                 <tr>
                     @foreach (var x in row.ToString().Split(","))
@@ -72,6 +74,7 @@
 
 
 @code {
+    List<Item> _itemsMemoryList;
     List<Item> _items;
     Form model = new Form();
     bool success;
@@ -80,6 +83,7 @@
     
     protected override void OnInitialized()
     {
+        _itemsMemoryList = new List<Item>();
         _items = new List<Item>();
         completado = true;
         model.Fecha = DateTime.Today;
@@ -110,13 +114,16 @@
     {
         completado = false;
         Dato _dato = ControladorDatos.AgregarDatos(model.Titulo, model.Autor, model.Destinatario, model.Fecha, model.Observacion);
+        foreach (var item in _itemsMemoryList)
+        {
+            _items.Add(ControladorItems.AgregarItem(item.Cantidad, item.Descripcion, item.Identificador));
+        }
         success = true;
         ControladorRecibos.AgregarRecibo(_items, _dato); 
-        await Task.Delay(10000);
         completado = true;
         model = new Form();
+        _itemsMemoryList.Clear();
         _items.Clear();
-        
         StateHasChanged();
     }
     
@@ -128,7 +135,7 @@
     
         if (!result.Canceled)
         {
-            _items = ControladorItems.ListarItems();
+            _itemsMemoryList = ItemMemoryRepo.Listar();
             StateHasChanged();
         }
         

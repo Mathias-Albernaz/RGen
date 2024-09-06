@@ -1,5 +1,6 @@
-@using Controladores
-@inject ControladorItems ControladorItems
+
+@using Repositorio
+@inject ItemMemoryRepo ItemMemoryRepo
 
 @inject ISnackbar Snackbar
 
@@ -43,7 +44,7 @@
     {
         if (identificador != "" && descripcion != "")
         {
-            ControladorItems.AgregarItem(cantidad, descripcion, identificador);
+            ItemMemoryRepo.Agregar(cantidad, descripcion, identificador);
             MudDialog.Close(DialogResult.Ok(true));
         }
         else
