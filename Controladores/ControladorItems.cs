@@ -15,10 +15,10 @@ public class ControladorItems
         _itemFactory = itemFactory;
     }
 
-    public void AgregarItem(int cantidad, string descripcion, string identificador)
+    public Item AgregarItem(int cantidad, string descripcion, string identificador)
     {
         Item nuevoItem = _itemFactory.Crear(cantidad, descripcion, identificador);
-        _repositorio.Agregar(nuevoItem);
+        return _repositorio.Agregar(nuevoItem);
     }
 
     public void BorrarItem(int id)
