@@ -6,12 +6,18 @@ public class ItemMemoryRepo
 {
     public List<Item> Items { get; set; }
 
-    public void Agregar(int cantidad, string descripcion)
+    public ItemMemoryRepo()
+    {
+        Items = new List<Item>();
+    }
+
+    public void Agregar(int cantidad, string descripcion, string identificador)
     {
         Item nuevoItem = new Item()
         {
             Cantidad = cantidad,
             Descripcion = descripcion,
+            Identificador = identificador
         };
         Items.Add(nuevoItem);
     }
