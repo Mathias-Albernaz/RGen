@@ -75,7 +75,6 @@
 
 @code {
     List<Item> _itemsMemoryList;
-    List<Item> _items;
     Form model = new Form();
     bool success;
     bool completado;
@@ -84,7 +83,6 @@
     protected override void OnInitialized()
     {
         _itemsMemoryList = new List<Item>();
-        _items = new List<Item>();
         completado = true;
         model.Fecha = DateTime.Today;
         StateHasChanged();
@@ -114,16 +112,11 @@
     {
         completado = false;
         Dato _dato = ControladorDatos.AgregarDatos(model.Titulo, model.Autor, model.Destinatario, model.Fecha, model.Observacion);
-        foreach (var item in _itemsMemoryList)
-        {
-            _items.Add(ControladorItems.AgregarItem(item.Cantidad, item.Descripcion, item.Identificador));
-        }
         success = true;
-        ControladorRecibos.AgregarRecibo(_items, _dato); 
+        ControladorRecibos.AgregarRecibo(_itemsMemoryList, _dato); 
         completado = true;
         model = new Form();
         _itemsMemoryList.Clear();
-        _items.Clear();
         StateHasChanged();
     }
     
