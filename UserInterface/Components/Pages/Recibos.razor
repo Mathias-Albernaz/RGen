@@ -1,4 +1,4 @@
-@page "/Datos"
+@page "/Recibos"
 @rendermode InteractiveServer
 
 
@@ -6,43 +6,35 @@
 @using Dominio
 @inject ControladorDatos ControladorDatos
 
-<MudText Typo="Typo.h2" Align="Align.Center">Recibos</MudText>
-
 <MudContainer MaxWidth="MaxWidth.Large">
-    <MudSimpleTable Dense="false"  Striped="true" Outlined="true" Hover="true">
-        <thead style="background-color: #6E36F4; color: white">
-        <tr>
-            @foreach (var h in headings)
-            {
-                <th>@h</th>
-            }
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (Dato dato in _datos)
-        {
-            <tr>
-                <td>@dato.Titulo</td>
-                <td>@dato.Autor</td>
-                <td>@dato.Destinatario</td>
-                <td>@dato.Fecha</td>
-                <td>@dato.Observacion</td>
-            </tr>
-        }
-        </tbody>
-    </MudSimpleTable>
+    <MudDataGrid Items="@_datos">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Recibos</MudText>
+            <MudSpacer/>
+            <MudTextField @bind-Value="busqueda" Placeholder="Buscar" Adornment="Adornment.Start" Immediate="true"
+                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <Columns>
+            <PropertyColumn Property="x => x.Titulo"/>
+            <PropertyColumn Property="x => x.Autor"/>
+            <PropertyColumn Property="x => x.Destinatario"/>
+            <PropertyColumn Property="x => x.Fecha"/>
+            <PropertyColumn Property="x => x.Observacion"/>
+        </Columns>
+    </MudDataGrid>
 </MudContainer>
 
 
 
 @code
 {
-    List<Dato> _datos;
-    List<Recibo> _recibos;
+    String busqueda;
+    IEnumerable<Dato> _datos = new List<Dato>();
+
     protected override void OnInitialized()
     {
         _datos = ControladorDatos.ListarDatos();
     }
 
-    string[] headings = { "Titulo", "Autor", "Destinatario", "Fecha", "Observacion" };
+    
 }
