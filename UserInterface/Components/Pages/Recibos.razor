@@ -5,9 +5,9 @@
 @using Controladores
 @using Dominio
 @inject ControladorDatos ControladorDatos
-
+<body style="background-color: #f4f4f4"></body>
 <MudContainer MaxWidth="MaxWidth.Large">
-    <MudDataGrid Items="@_datos">
+    <MudDataGrid T="Dato" Items="@_datos" FixedHeader="true" Striped="true" Hover="true" Dense="true" Height="70dvh" QuickFilter="@_quickFilter" SortMode="SortMode.Multiple">
         <ToolBarContent>
             <MudText Typo="Typo.h6">Recibos</MudText>
             <MudSpacer/>
@@ -20,6 +20,13 @@
             <PropertyColumn Property="x => x.Destinatario"/>
             <PropertyColumn Property="x => x.Fecha"/>
             <PropertyColumn Property="x => x.Observacion"/>
+            <TemplateColumn>
+                <CellTemplate>
+
+                    <MudIconButton Icon="@Icons.Material.Filled.DensityMedium" Size="Size.Small"></MudIconButton>
+
+                </CellTemplate>
+            </TemplateColumn>
         </Columns>
     </MudDataGrid>
 </MudContainer>
@@ -36,5 +43,24 @@
         _datos = ControladorDatos.ListarDatos();
     }
 
-    
+    private Func<Dato, bool> _quickFilter => x =>
+    {
+        if (string.IsNullOrWhiteSpace(busqueda))
+            return true;
+
+        if (x.Titulo.Contains(busqueda, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if (x.Autor.Contains(busqueda, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if (x.Destinatario.Contains(busqueda, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if (x.Observacion.Contains(busqueda, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{x.Fecha}".Contains(busqueda))
+            return true;
+        return false;
+    };
 }
