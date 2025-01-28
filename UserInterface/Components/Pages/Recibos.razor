@@ -35,7 +35,7 @@
 
 @code
 {
-    String busqueda;
+    String busqueda = string.Empty; // Inicializa con cadena vacía
     IEnumerable<Dato> _datos = new List<Dato>();
 
     protected override void OnInitialized()
@@ -47,20 +47,10 @@
     {
         if (string.IsNullOrWhiteSpace(busqueda))
             return true;
-
-        if (x.Titulo.Contains(busqueda, StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        if (x.Autor.Contains(busqueda, StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        if (x.Destinatario.Contains(busqueda, StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        if (x.Observacion.Contains(busqueda, StringComparison.OrdinalIgnoreCase))
-            return true;
-        if ($"{x.Fecha}".Contains(busqueda))
-            return true;
-        return false;
+        return (x.Titulo?.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ?? false) ||
+               (x.Autor?.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ?? false) ||
+               (x.Destinatario?.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ?? false) ||
+               (x.Observacion?.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ?? false) ||
+               $"{x.Fecha}".Contains(busqueda, StringComparison.OrdinalIgnoreCase);
     };
 }
